@@ -6,15 +6,19 @@ import ElementUI from 'element-ui'
 import 'element-ui/lib/theme-chalk/index.css'
 import router from './router'
 import 'font-awesome/css/font-awesome.min.css'
+import axios from 'axios'
 
 Vue.config.productionTip = false
 Vue.use(ElementUI, {
   size: 'medium',
 })
+// Vue.use(axios)
+Vue.prototype.axios = axios;
 /* eslint-disable no-new */
 new Vue({
   el: '#app',
   router,
+  axios,
   components: { App },
   template: '<App/>'
 })
