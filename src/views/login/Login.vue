@@ -133,15 +133,31 @@
       handleLogin(){
         const self = this;
         this.$refs["loginForm"].validate((valid) => {
+            var obj = {
+              username: this.loginForm.email,
+              password: this.loginForm.password
+            };
+            console.log(obj);
           if (valid) {
-            console.log(self.loginForm);
-            this.axios.post('/login', self.loginForm)
-              .then(function (response) {
-                console.log(response);
-              })
-              .catch(function (error) {
-                console.log(error);
-              });
+            var path = self.$route.query.redirect;
+//            self.$router.replace({path: path == '/' || path == undefined ? '/home' : path});
+            this.axios({
+              method: 'post',
+              url: '/login',
+              data: obj,
+              transformRequest: [function (data) {
+                let ret = ''
+                for (let it in data) {
+                  ret += encodeURIComponent(it) + '=' + encodeURIComponent(data[it]) + '&'
+                }
+                return ret
+              }],
+              headers: {
+                'Content-Type': 'application/x-www-form-urlencoded'
+              }
+            }).then(resp=> {
+              self.$router.replace({path: path == '/' || path == undefined ? '/home' : path});
+            });
           }
         });
       }
