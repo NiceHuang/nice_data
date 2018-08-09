@@ -140,24 +140,24 @@
             console.log(obj);
           if (valid) {
             var path = self.$route.query.redirect;
-//            self.$router.replace({path: path == '/' || path == undefined ? '/home' : path});
-            this.axios({
-              method: 'post',
-              url: '/login',
-              data: obj,
-              transformRequest: [function (data) {
-                let ret = ''
-                for (let it in data) {
-                  ret += encodeURIComponent(it) + '=' + encodeURIComponent(data[it]) + '&'
-                }
-                return ret
-              }],
-              headers: {
-                'Content-Type': 'application/x-www-form-urlencoded'
-              }
-            }).then(resp=> {
-              self.$router.replace({path: path == '/' || path == undefined ? '/home' : path});
-            });
+            self.$router.replace({path: path == '/' || path == undefined ? '/home' : path});
+//            this.axios({
+//              method: 'post',
+//              url: '/login',
+//              data: obj,
+//              transformRequest: [function (data) {
+//                let ret = ''
+//                for (let it in data) {
+//                  ret += encodeURIComponent(it) + '=' + encodeURIComponent(data[it]) + '&'
+//                }
+//                return ret
+//              }],
+//              headers: {
+//                'Content-Type': 'application/x-www-form-urlencoded'
+//              }
+//            }).then(resp=> {
+//              self.$router.replace({path: path == '/' || path == undefined ? '/home' : path});
+//            });
           }
         });
       }
