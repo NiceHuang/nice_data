@@ -133,14 +133,21 @@
       handleLogin(){
         const self = this;
         this.$refs["loginForm"].validate((valid) => {
-            var obj = {
-              username: this.loginForm.email,
-              password: this.loginForm.password
-            };
-            console.log(obj);
+          var obj = {
+            username: this.loginForm.email,
+            password: this.loginForm.password
+          };
           if (valid) {
             var path = self.$route.query.redirect;
-            self.$router.replace({path: path == '/' || path == undefined ? '/home' : path});
+            self.$store.dispatch('actionLogin', obj).then((response) => {
+              self.$router.replace({path: path == '/' || path == undefined ? '/home' : path});
+            }).catch(() => {
+              self.$message({
+                type: 'error',
+                message: '登录失败'
+              });
+            });
+
 //            this.axios({
 //              method: 'post',
 //              url: '/login',

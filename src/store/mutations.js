@@ -5,11 +5,8 @@ const mutations = {
   SET_USER_NAME:(state, name) => {
     state.user.name = name
   },
-  SET_APP_TOKEN:(state, token) => {
-    setTimeout(()=>{
-      state.app.token = token;
-    }, 2000);
-    // state.app.token = token;
+  SET_USER_TOKEN:(state, token) => {
+    state.user.token = token;
   },
 }
 export default mutations;
